@@ -1,16 +1,17 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:ihm_projet_mobilite/views/home_view.dart';
 import 'package:ihm_projet_mobilite/views/map_view.dart';
 
-class FrontView extends StatefulWidget {
-  static const String routeName = "/FrontView";
+class SplashScreen extends StatefulWidget {
+  static const String routeName = "/SplashScreen";
 
   @override
-  _FrontViewState createState() => _FrontViewState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _FrontViewState extends State<FrontView> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -55,7 +56,7 @@ class _FrontViewState extends State<FrontView> {
               child: RaisedButton(
                 child: Text('Commencer'),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(MapView.routeName);
+                  Navigator.of(context).pushReplacementNamed(HomeView.routeName);
                 },
               ),
             )

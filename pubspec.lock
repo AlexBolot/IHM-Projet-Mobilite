@@ -69,18 +69,18 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_stash:
-    dependency: "direct main"
-    description:
-      name: flutter_stash
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
+  grouped_buttons:
+    dependency: "direct main"
+    description:
+      name: grouped_buttons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.4"
   image:
     dependency: transitive
     description:
