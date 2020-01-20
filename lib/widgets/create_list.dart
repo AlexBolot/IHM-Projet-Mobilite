@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/shared.dart';
@@ -85,7 +87,12 @@ class _AddListState extends State<AddList> {
             ),
             RaisedButton.icon(
               color: Theme.of(context).primaryColor,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop({
+                  'title': listNameController.text.trim(),
+                  'items': savedItems
+                });
+              },
               icon: Icon(
                 Icons.check,
                 color: contrastOf(Theme.of(context).primaryColor),
