@@ -73,7 +73,7 @@ class _HomeViewState extends State<HomeView> {
       children: <Widget>[
         Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(title: Text('Hello World')),
+          appBar: AppBar(title: Text('EasyShopping')),
           body: buildPageView(),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: index,
