@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ihm_projet_mobilite/views/add_list_view.dart';
-import 'package:ihm_projet_mobilite/widgets/ListItem.dart';
+import 'package:ihm_projet_mobilite/widgets/create_list.dart';
+import 'package:ihm_projet_mobilite/widgets/delete_list.dart';
+import 'package:ihm_projet_mobilite/widgets/list_item.dart';
 
 class ShoppingListsView extends StatefulWidget {
   static const String routeName = "/ShoppingListsView";
@@ -14,29 +15,32 @@ class ShoppingListsView extends StatefulWidget {
 }
 
 class _ShoppingListsViewState extends State<ShoppingListsView> {
-  Map<String, bool> _activeItems = {
-    'Liste de Jean': true,
-    'Courses de réveillon': true,
-    'Liste temporaire': true,
-  };
+  List<String> _activeItems = [
+    'Liste de Jean',
+    'Courses de réveillon',
+    'Liste temporaire'
+  ];
 
   @override
   void initState() {
     super.initState();
   }
 
-  onChange(text, value) => setState(() => _activeItems[text] = value);
+  onSelected(text) => setState(() => print('selected $text'));
 
-  onDelete(text) => setState(() => _activeItems.remove(text));
+  onDelete(text) async {
+    if (await showDialog(context: context, child: DeleteList()) ?? false) {
+      setState(() => _activeItems.remove(text));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var sortedItems = _activeItems.keys.toList()..sort();
+    var sortedItems = _activeItems..sort();
     var activeItems = sortedItems.map(
-      (String f) => ListItem(
-        text: f,
-        value: _activeItems[f],
-        onChange: onChange,
+      (name) => ListItem(
+        text: name,
+        onSelected: onSelected,
         onDelete: onDelete,
       ),
     );
@@ -46,16 +50,13 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
         heroTag: 'createList',
         label: Text('Ajouter'),
         icon: Icon(Icons.playlist_add, size: 30),
-        onPressed: () => showDialog(context: context, child: AddListView()),
+        onPressed: () => showDialog(context: context, child: AddList()),
+      ),
+      appBar: AppBar(
+        title: Text('Mes listes de courses', textAlign: TextAlign.center),
       ),
       body: Container(
-        child: Column(
-          children: <Widget>[
-            Container(height: 16),
-            Text('Mes listes de courses'),
-            Container(height: 16),
-          ]..addAll(activeItems),
-        ),
+        child: Column(children: <Widget>[]..addAll(activeItems)),
       ),
     );
   }
