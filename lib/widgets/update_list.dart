@@ -4,16 +4,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/shared.dart';
 
-class AddList extends StatefulWidget {
+class UpdateList extends StatefulWidget {
+  final Map map;
+
+  UpdateList(this.map);
+
   @override
-  _AddListState createState() => _AddListState();
+  _UpdateListState createState() => _UpdateListState();
 }
 
-class _AddListState extends State<AddList> {
-  TextEditingController listNameController = TextEditingController();
-  TextEditingController productNameController = TextEditingController();
+class _UpdateListState extends State<UpdateList> {
+  TextEditingController _listNameController = TextEditingController();
+  TextEditingController _productNameController = TextEditingController();
 
-  List<String> savedItems = [];
+  List<String> _savedItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _listNameController.text = widget.map['title'];
+    _savedItems = widget.map['items'];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +44,7 @@ class _AddListState extends State<AddList> {
                 children: <Widget>[
                   TextField(
                     textCapitalization: TextCapitalization.words,
-                    controller: listNameController,
+                    controller: _listNameController,
                     decoration: InputDecoration.collapsed(
                       hintText: 'Nom de la liste',
                     ),
@@ -45,7 +56,7 @@ class _AddListState extends State<AddList> {
                       Flexible(
                         child: TextField(
                           textCapitalization: TextCapitalization.words,
-                          controller: productNameController,
+                          controller: _productNameController,
                           decoration: InputDecoration(hintText: 'Produit'),
                           onSubmitted: (_) => addItem(),
                         ),
@@ -61,7 +72,7 @@ class _AddListState extends State<AddList> {
               child: Container(
                 width: 300,
                 child: ListView(
-                  children: savedItems.reversed.map((item) {
+                  children: _savedItems.reversed.map((item) {
                     return Card(
                       elevation: 4,
                       child: Row(
@@ -89,8 +100,8 @@ class _AddListState extends State<AddList> {
               color: Theme.of(context).primaryColor,
               onPressed: () {
                 Navigator.of(context).pop({
-                  'title': listNameController.text.trim(),
-                  'items': savedItems
+                  'title': _listNameController.text.trim(),
+                  'items': _savedItems
                 });
               },
               icon: Icon(
@@ -98,7 +109,7 @@ class _AddListState extends State<AddList> {
                 color: contrastOf(Theme.of(context).primaryColor),
               ),
               label: Text(
-                'Créer',
+                'Mettre à jour',
                 style: TextStyle(
                   color: contrastOf(Theme.of(context).primaryColor),
                 ),
@@ -111,17 +122,17 @@ class _AddListState extends State<AddList> {
   }
 
   addItem() {
-    String text = productNameController.text.trim();
+    String text = _productNameController.text.trim();
     if (text.isNotEmpty) {
-      setState(() => savedItems.add(text));
+      setState(() => _savedItems.add(text));
     }
 
-    productNameController.text = '';
+    _productNameController.text = '';
   }
 
   removeItem(name) {
     setState(() {
-      savedItems.remove(name);
+      _savedItems.remove(name);
     });
   }
 }

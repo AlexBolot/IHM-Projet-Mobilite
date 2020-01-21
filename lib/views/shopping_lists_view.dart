@@ -3,7 +3,7 @@ import 'package:ihm_projet_mobilite/shared.dart';
 import 'package:ihm_projet_mobilite/widgets/create_list.dart';
 import 'package:ihm_projet_mobilite/widgets/delete_list.dart';
 import 'package:ihm_projet_mobilite/widgets/list_item.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:ihm_projet_mobilite/widgets/update_list.dart';
 
 class ShoppingListsView extends StatefulWidget {
   static const String routeName = "/ShoppingListsView";
@@ -20,7 +20,7 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
   Map<String, List<String>> _shoppingLists = {};
 
   @override
-  void initState() async {
+  void initState() {
     super.initState();
     List<String> listNames = prefs.getStringList('shoppingLists');
 
@@ -29,12 +29,31 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
     });
   }
 
-  onSelected(text) => setState(() => print('selected $text'));
+  onSelected(text) async => onEdit(text);
 
   onDelete(text) async {
-    if (await showDialog(context: context, child: DeleteList()) ?? false) {
+    bool shouldDelete = await showDialog(context: context, child: DeleteList());
+
+    if (shouldDelete ?? false) {
       setState(() => _shoppingLists.remove(text));
     }
+  }
+
+  onEdit(text) async {
+    Map updatedList = await showDialog(
+      context: context,
+      child: UpdateList(
+        {'title': text, 'items': _shoppingLists[text]},
+      ),
+    );
+
+    if (updatedList == null) return;
+
+    setState(() {
+      _shoppingLists.remove(text);
+      _shoppingLists.putIfAbsent(
+          updatedList['title'], () => updatedList['items']);
+    });
   }
 
   @override
@@ -45,6 +64,7 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
         text: name,
         onSelected: onSelected,
         onDelete: onDelete,
+        onEdit: onEdit,
       ),
     );
 
@@ -66,10 +86,13 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
 
   addList() async {
     var result = await showDialog(context: context, child: AddList());
+
+    print(result);
+
     setState(() {
-      _shoppingLists.putIfAbsent(result.title, () => result.items);
-      prefs.setStringList('shoppingLists', _shoppingLists.keys);
-      prefs.setStringList(result.title, result.items);
+      _shoppingLists.putIfAbsent(result['title'], () => result['items']);
+      prefs.setStringList('shoppingLists', _shoppingLists.keys.toList());
+      prefs.setStringList(result['title'], result['items']);
     });
   }
 }
