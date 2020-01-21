@@ -24,7 +24,7 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
     super.initState();
     List<String> listNames = prefs.getStringList('shoppingLists');
 
-    listNames.forEach((name) {
+    (listNames ?? []).forEach((name) {
       _shoppingLists.putIfAbsent(name, () => prefs.getStringList(name));
     });
   }
