@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:ihm_projet_mobilite/model/ShopData.dart';
 
 class MapView extends StatefulWidget {
   static const String routeName = "/MapView";
@@ -21,6 +23,7 @@ class _MapViewState extends State<MapView> {
   GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: "AIzaSyApEnhQoSvcowDisHAGJAh5HyXCOXNo8fQ");
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set();
+  Map<String, ShopData> _shopsData = HashMap();
   Location _location;
   CameraPosition _userPosition;
 
@@ -44,11 +47,6 @@ class _MapViewState extends State<MapView> {
     setState(() {});
   }
 
-  static final CameraPosition _saintPhillipe = CameraPosition(
-    target: LatLng(43.61, 7.0775),
-    zoom: 13.9,
-  );
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -56,6 +54,8 @@ class _MapViewState extends State<MapView> {
           ? GoogleMap(
               mapType: MapType.normal,
               initialCameraPosition: _userPosition,
+              //myLocationButtonEnabled: true,
+              myLocationEnabled: true,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
@@ -71,26 +71,24 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<void> _lookingForShops() async {
-    //print(_location);
     final result = await _places.searchNearbyWithRadius(_location, 2500);
-    print(result.results.toString());
-    Set<Marker> tmp = _markers;
+    Set<Marker> markersTmp = _markers;
+    Map<String, ShopData> dataTmp = _shopsData;
     result.results.forEach((f) {
-      //print(f.geometry.location.toString());
-      Marker marker = Marker(
-          markerId: MarkerId(f.name),
-          position: LatLng(f.geometry.location.lat, f.geometry.location.lng));
-      tmp.add(marker);
+      if(f.types.contains("grocery_or_supermarket") || f.types.contains("store")){
+        Marker marker = Marker(
+            markerId: MarkerId(f.name),
+            position: LatLng(f.geometry.location.lat, f.geometry.location.lng));
+        dataTmp.putIfAbsent(f.id, () => new ShopData(f.id, f.name, f.vicinity, f.types, f.openingHours, f.photos, f.rating));
+        markersTmp.add(marker);
+      }
     });
-    /*_markers.add(Marker(
-      markerId: MarkerId('Casino'),
-      position: LatLng(43.617795, 7.075082),
-    ));
-    _markers.add(Marker(
-      markerId: MarkerId('Carrefour'),
-      position: LatLng(43.603854, 7.089324),
-    ));*/
-    //print(tmp.length);
-    setState(() { _markers = tmp; });
+    setState(() {
+      _markers = markersTmp;
+      _shopsData = dataTmp;
+    });
+    _shopsData.values.toSet().forEach((f) {
+      print(f.toString());
+    });
   }
 }

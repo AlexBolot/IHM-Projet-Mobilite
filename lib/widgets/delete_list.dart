@@ -13,7 +13,7 @@ class _DeleteListState extends State<DeleteList> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
-      title: Text('Ajouter une liste', textAlign: TextAlign.center),
+      title: Text('Supprimer une liste', textAlign: TextAlign.center),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
