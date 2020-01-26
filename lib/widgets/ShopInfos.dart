@@ -7,8 +7,8 @@ class ShopInfos extends StatefulWidget {
   final bool dedicatedStaff;
   final bool isOpen;
 
-  const ShopInfos(
-      {Key key, this.name, this.address, this.dedicatedStaff, this.isOpen})
+  ShopInfos(
+      {Key key, this.name = "name", this.address = "address", this.dedicatedStaff = true, this.isOpen = true})
       : super(key: key);
 
   @override
@@ -26,7 +26,7 @@ class _ShopInfosState extends State<ShopInfos> {
         content: new ListView(
           children: <Widget>[
             new Text(widget.isOpen ? "Ouvert" : "Fermé"),
-            new Image.asset('images/carrefour.jpg', fit: BoxFit.cover),
+            new Image.asset('./images/carrefour.jpg', fit: BoxFit.cover),
             new Text(widget.address),
             new Text("Personnel dédié :" +
                 (widget.dedicatedStaff ? "Disponible" : "Indisponible")),
