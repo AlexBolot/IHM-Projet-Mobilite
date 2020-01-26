@@ -71,7 +71,7 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<void> _lookingForShops() async {
-    final result = await _places.searchNearbyWithRadius(_location, 2500);
+    final result = await _places.searchNearbyWithRadius(_location, 2500, type: "grocery_or_supermarket");
     Set<Marker> markersTmp = _markers;
     Map<String, ShopData> dataTmp = _shopsData;
     result.results.forEach((f) {
