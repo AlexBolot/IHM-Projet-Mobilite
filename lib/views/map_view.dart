@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../widgets/ShopInfos.dart';
 
 class MapView extends StatefulWidget {
   static const String routeName = "/MapView";
@@ -16,7 +17,6 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set();
 
@@ -29,7 +29,6 @@ class _MapViewState extends State<MapView> {
     target: LatLng(43.61, 7.0775),
     zoom: 13.9,
   );
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,13 +53,11 @@ class _MapViewState extends State<MapView> {
     _markers.add(Marker(
         markerId: MarkerId('Casino'),
         position: LatLng(43.617795, 7.075082),
-      )
-    );
+        onTap: () => showDialog(context: context, child: ShopInfos())));
     _markers.add(Marker(
-      markerId: MarkerId('Carrefour'),
-      position: LatLng(43.603854, 7.089324),
-    )
-    );
+        markerId: MarkerId('Carrefour'),
+        position: LatLng(43.603854, 7.089324),
+        onTap: () => showDialog(context: context, child: ShopInfos())));
     setState(() {});
   }
 }
