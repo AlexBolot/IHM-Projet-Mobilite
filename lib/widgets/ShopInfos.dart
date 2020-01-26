@@ -7,9 +7,7 @@ class ShopInfos extends StatefulWidget {
   final bool dedicatedStaff;
   final bool isOpen;
 
-  ShopInfos(
-      {Key key, this.name = "name", this.address = "address", this.dedicatedStaff = true, this.isOpen = true})
-      : super(key: key);
+  ShopInfos(this.name, this.address, this.dedicatedStaff, this.isOpen);
 
   @override
   _ShopInfosState createState() => _ShopInfosState();
