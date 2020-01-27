@@ -3,6 +3,8 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../widgets/ShopInfos.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_webservice/places.dart';
@@ -78,7 +80,8 @@ class _MapViewState extends State<MapView> {
       if(f.types.contains("grocery_or_supermarket") || f.types.contains("store")){
         Marker marker = Marker(
             markerId: MarkerId(f.name),
-            position: LatLng(f.geometry.location.lat, f.geometry.location.lng));
+            position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
+            onTap: () => showDialog(context: context, child: ShopInfos("Supermarché casino", "Saint Philippe", true, true)));
         dataTmp.putIfAbsent(f.id, () => new ShopData(f.id, f.name, f.vicinity, f.types, f.openingHours, f.photos, f.rating));
         markersTmp.add(marker);
       }
