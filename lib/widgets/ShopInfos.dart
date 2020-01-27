@@ -20,13 +20,13 @@ class _ShopInfosState extends State<ShopInfos> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
-        title: new Text(widget.name),
-        content: new ListView(
+        title: Text(widget.name),
+        content: Column(
           children: <Widget>[
-            new Text(widget.isOpen ? "Ouvert" : "Fermé"),
-            new Image.asset('./images/carrefour.jpg', fit: BoxFit.cover),
-            new Text(widget.address),
-            new Text("Personnel dédié :" +
+            Text(widget.isOpen ? "Ouvert" : "Fermé"),
+            Image.asset('./images/carrefour.jpg', fit: BoxFit.cover),
+            Text(widget.address),
+            Text("Personnel dédié :" +
                 (widget.dedicatedStaff ? "Disponible" : "Indisponible")),
           ],
         ));

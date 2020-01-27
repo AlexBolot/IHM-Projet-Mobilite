@@ -53,11 +53,11 @@ class _MapViewState extends State<MapView> {
     _markers.add(Marker(
         markerId: MarkerId('Casino'),
         position: LatLng(43.617795, 7.075082),
-        onTap: () => showDialog(context: context, child: ShopInfos("name", "adresse", true, true))));
+        onTap: () => showDialog(context: context, child: ShopInfos("Supermarché casino", "Saint Philippe", true, true))));
     _markers.add(Marker(
         markerId: MarkerId('Carrefour'),
         position: LatLng(43.603854, 7.089324),
-        onTap: () => showDialog(context: context, child: ShopInfos("name2", "adresse2", false, false))));
+        onTap: () => showDialog(context: context, child: ShopInfos("Carrefour", "Antibes", false, true))));
     setState(() {});
   }
 }
