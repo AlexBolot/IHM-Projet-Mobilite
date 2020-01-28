@@ -5,24 +5,28 @@ class ShopData {
   String id;
   String name;
   String address;
+  bool open;
   List<String> types;
   OpeningHours openingHours;
   List<Photo> photos;
   num rating;
+  bool dedicatedStaff;
 
-  ShopData(String id, String name, String address, List<String> types, OpeningHours openingHours, List<Photo> photos, num rating) {
+  ShopData(String id, String name, String address, bool open, List<String> types, OpeningHours openingHours, List<Photo> photos, num rating, bool dedicatedStaff) {
     this.id = id;
     this.name = name;
     this.address = address;
+    this.open = open;
     this.types = types;
     this.openingHours = openingHours;
     this.photos = photos;
     this.rating = rating;
+    this.dedicatedStaff = dedicatedStaff;
   }
 
   @override
   String toString() {
-    return 'ShopData{id: $id, name: $name, address: $address, types: $types, openingHours: $openingHours, photos: $photos, rating: $rating}';
+    return 'ShopData{id: $id, name: $name, address: $address, open: $open, types: $types, openingHours: $openingHours, photos: $photos, rating: $rating, dedicatedStaff: $dedicatedStaff}';
   }
 
 

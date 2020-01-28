@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ihm_projet_mobilite/model/ShopData.dart';
 
 class ShopInfos extends StatefulWidget {
-  final String name;
-  final String address;
-  final bool dedicatedStaff;
-  final bool isOpen;
+  final ShopData shopData;
 
-  ShopInfos(this.name, this.address, this.dedicatedStaff, this.isOpen);
+  ShopInfos(this.shopData);
 
   @override
   _ShopInfosState createState() => _ShopInfosState();
@@ -20,14 +18,14 @@ class _ShopInfosState extends State<ShopInfos> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
-        title: Text(widget.name),
+        title: Text(widget.shopData.name),
         content: Column(
           children: <Widget>[
-            Text(widget.isOpen ? "Ouvert" : "Fermé"),
+            Text(widget.shopData.open ? "Ouvert" : "Fermé"),
             Image.asset('./images/carrefour.jpg', fit: BoxFit.cover),
-            Text(widget.address),
+            Text(widget.shopData.address),
             Text("Personnel dédié :" +
-                (widget.dedicatedStaff ? "Disponible" : "Indisponible")),
+                (widget.shopData.dedicatedStaff ? "Disponible" : "Indisponible")),
           ],
         ));
   }

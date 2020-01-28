@@ -74,24 +74,16 @@ class _MapViewState extends State<MapView> {
 
   Future<void> _lookingForShops() async {
     final result = await _places.searchNearbyWithRadius(_location, 2500, type: "grocery_or_supermarket");
-    Set<Marker> markersTmp = _markers;
-    Map<String, ShopData> dataTmp = _shopsData;
     result.results.forEach((f) {
-      if(f.types.contains("grocery_or_supermarket") || f.types.contains("store")){
+      if(!_shopsData.containsKey(f.id)){
+        _shopsData.putIfAbsent(f.id, () => new ShopData(f.id, f.name, f.vicinity, true, f.types, f.openingHours, f.photos, f.rating, true));
         Marker marker = Marker(
-            markerId: MarkerId(f.name),
+            markerId: MarkerId(f.id),
             position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
-            onTap: () => showDialog(context: context, child: ShopInfos("Supermarché casino", "Saint Philippe", true, true)));
-        dataTmp.putIfAbsent(f.id, () => new ShopData(f.id, f.name, f.vicinity, f.types, f.openingHours, f.photos, f.rating));
-        markersTmp.add(marker);
+            onTap: () => showDialog(context: context, child: ShopInfos(_shopsData[f.id])));
+        _markers.add(marker);
       }
     });
-    setState(() {
-      _markers = markersTmp;
-      _shopsData = dataTmp;
-    });
-    _shopsData.values.toSet().forEach((f) {
-      print(f.toString());
-    });
+    setState(() {});
   }
 }
