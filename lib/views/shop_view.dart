@@ -14,12 +14,12 @@ class ShopView extends StatefulWidget {
 }
 
 class _ShopViewState extends State<ShopView> {
-  String currentText = selectedShop ?? "";
+  String currentText = "";
   String _shoppingListName;
   Map<String, List<String>> _shoppingLists = {};
   List<String> _listName;
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
-  TextEditingController _shopNameController = TextEditingController();
+  TextEditingController _shopNameController = TextEditingController(text: selectedShop);
   SimpleAutoCompleteTextField textField;
 
   @override
@@ -51,40 +51,42 @@ class _ShopViewState extends State<ShopView> {
 
   @override
   Widget build(BuildContext context) {
+    selectedShop = "";
     return new Scaffold(
         body: ListView(
-      children: <Widget>[
-        Text("Sélection Magasin"),
-        ListTile(
-          title: textField,
-        ),
-        Text("Sélection Liste"),
-        DropdownButton<String>(
-          hint: Text("Choisir liste"),
-          value: _shoppingListName,
-          icon: Icon(Icons.arrow_drop_down),
-          iconSize: 24,
-          elevation: 16,
-          underline: Container(
-            height: 2,
-            color: Colors.blue,
-          ),
-          onChanged: (String newValue) {
-            setState(() {
-              _shoppingListName = newValue;
-              print(_shoppingListName);
-              print(_shoppingLists[_shoppingListName]);
-            });
-          },
-          items: _listName.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-        ),
-        Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
-      ],
-    ));
+          children: <Widget>[
+            Text("Sélection Magasin"),
+            ListTile(
+              title: textField,
+            ),
+            Text("Sélection Liste"),
+            DropdownButton<String>(
+              hint: Text("Choisir liste"),
+              value: _shoppingListName,
+              icon: Icon(Icons.arrow_drop_down),
+              iconSize: 24,
+              elevation: 16,
+              underline: Container(
+                height: 2,
+                color: Colors.blue,
+              ),
+              onChanged: (String newValue) {
+                setState(() {
+                  _shoppingListName = newValue;
+                  print(_shoppingListName);
+                  print(_shoppingLists[_shoppingListName]);
+                });
+              },
+              items: _listName.map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
+            Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
+          ],
+        )
+    );
   }
 }

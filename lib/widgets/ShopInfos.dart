@@ -61,8 +61,11 @@ class _ShopInfosState extends State<ShopInfos> {
                 'Itinéraire au sein du magasin',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () =>
-                  {Navigator.of(context).pop(false), widget.bottomTapped(1)},
+              onPressed: () => {
+                Navigator.of(context).pop(false),
+                selectedShop = widget.shopData.name,
+                widget.bottomTapped(1),
+              },
             )
           ],
         ));
