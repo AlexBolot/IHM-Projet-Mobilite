@@ -1,7 +1,6 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
-
-import '../shared.dart';
+import 'package:ihm_projet_mobilite/shared.dart';
 
 class ShopView extends StatefulWidget {
   static const String routeName = "/ShopView";
@@ -85,40 +84,39 @@ class _ShopViewState extends State<ShopView> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: ListView(
-        children: <Widget>[
-          Text("Sélection Magasin"),
-          ListTile(
-            title : textField,
+        body: ListView(
+      children: <Widget>[
+        Text("Sélection Magasin"),
+        ListTile(
+          title: textField,
+        ),
+        Text("Sélection Liste"),
+        DropdownButton<String>(
+          hint: Text("Choisir liste"),
+          value: _shoppingListName,
+          icon: Icon(Icons.arrow_drop_down),
+          iconSize: 24,
+          elevation: 16,
+          underline: Container(
+            height: 2,
+            color: Colors.blue,
           ),
-          Text("Sélection Liste"),
-          DropdownButton<String>(
-            hint: Text("Choisir liste"),
-            value: _shoppingListName,
-            icon: Icon(Icons.arrow_drop_down),
-            iconSize: 24,
-            elevation: 16,
-            underline: Container(
-              height: 2,
-              color: Colors.blue,
-            ),
-            onChanged: (String newValue) {
-              setState(() {
-                _shoppingListName = newValue;
-                print(_shoppingListName);
-                print(_shoppingLists[_shoppingListName]);
-              });
-            },
-            items: _listName.map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
-        ],
-      )
-    );
+          onChanged: (String newValue) {
+            setState(() {
+              _shoppingListName = newValue;
+              print(_shoppingListName);
+              print(_shoppingLists[_shoppingListName]);
+            });
+          },
+          items: _listName.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+        ),
+        Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
+      ],
+    ));
   }
 }

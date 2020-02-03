@@ -1,7 +1,6 @@
 import 'package:google_maps_webservice/places.dart';
 
 class ShopData {
-
   String id;
   String name;
   String address;
@@ -12,7 +11,16 @@ class ShopData {
   num rating;
   bool dedicatedStaff;
 
-  ShopData(String id, String name, String address, bool open, List<String> types, OpeningHours openingHours, List<Photo> photos, num rating, bool dedicatedStaff) {
+  ShopData(
+      String id,
+      String name,
+      String address,
+      bool open,
+      List<String> types,
+      OpeningHours openingHours,
+      List<Photo> photos,
+      num rating,
+      bool dedicatedStaff) {
     this.id = id;
     this.name = name;
     this.address = address;
@@ -28,6 +36,4 @@ class ShopData {
   String toString() {
     return 'ShopData{id: $id, name: $name, address: $address, open: $open, types: $types, openingHours: $openingHours, photos: $photos, rating: $rating, dedicatedStaff: $dedicatedStaff}';
   }
-
-
 }

@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/views/home_view.dart';
-import 'package:ihm_projet_mobilite/views/map_view.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String routeName = "/SplashScreen";
@@ -56,7 +55,8 @@ class _SplashScreenState extends State<SplashScreen> {
               child: RaisedButton(
                 child: Text('Commencer'),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(HomeView.routeName);
+                  Navigator.of(context)
+                      .pushReplacementNamed(HomeView.routeName);
                 },
               ),
             )

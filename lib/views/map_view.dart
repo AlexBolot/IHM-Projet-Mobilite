@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../widgets/ShopInfos.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:ihm_projet_mobilite/model/ShopData.dart';
+import 'package:ihm_projet_mobilite/shared.dart';
+
+import '../widgets/ShopInfos.dart';
 
 class MapView extends StatefulWidget {
   static const String routeName = "/MapView";
@@ -22,7 +22,8 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
-  GoogleMapsPlaces _places = GoogleMapsPlaces(apiKey: "AIzaSyApEnhQoSvcowDisHAGJAh5HyXCOXNo8fQ");
+  GoogleMapsPlaces _places =
+      GoogleMapsPlaces(apiKey: "AIzaSyApEnhQoSvcowDisHAGJAh5HyXCOXNo8fQ");
   Completer<GoogleMapController> _controller = Completer();
   Set<Marker> _markers = Set();
   Map<String, ShopData> _shopsData = HashMap();
@@ -73,15 +74,21 @@ class _MapViewState extends State<MapView> {
   }
 
   Future<void> _lookingForShops() async {
-    final result = await _places.searchNearbyWithRadius(_location, 2500, type: "grocery_or_supermarket");
+    final result = await _places.searchNearbyWithRadius(_location, 2500,
+        type: "grocery_or_supermarket");
     result.results.forEach((f) {
-      if(!_shopsData.containsKey(f.id)){
-        _shopsData.putIfAbsent(f.id, () => new ShopData(f.id, f.name, f.vicinity, true, f.types, f.openingHours, f.photos, f.rating, true));
+      if (!_shopsData.containsKey(f.id)) {
+        _shopsData.putIfAbsent(
+            f.id,
+            () => new ShopData(f.id, f.name, f.vicinity, true, f.types,
+                f.openingHours, f.photos, f.rating, true));
         Marker marker = Marker(
             markerId: MarkerId(f.id),
             position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
-            onTap: () => showDialog(context: context, child: ShopInfos(_shopsData[f.id])));
+            onTap: () => showDialog(
+                context: context, child: ShopInfos(_shopsData[f.id])));
         _markers.add(marker);
+        shops.add(f.name);
       }
     });
     setState(() {});

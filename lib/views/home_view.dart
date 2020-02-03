@@ -64,11 +64,7 @@ class _HomeViewState extends State<HomeView> {
       onPageChanged: (index) {
         _pageChanged(index);
       },
-      children: <Widget>[
-        MapView(),
-        ShopView(),
-        ShoppingListsView()
-      ],
+      children: <Widget>[MapView(), ShopView(), ShoppingListsView()],
     );
   }
 
