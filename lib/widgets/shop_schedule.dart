@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/model/ShopData.dart';
 
 class ShopSchedule extends StatefulWidget {
@@ -13,42 +14,45 @@ class ShopSchedule extends StatefulWidget {
 class _ShopScheduleState extends State<ShopSchedule> {
   @override
   Widget build(BuildContext context) {
-    return Table(children: [
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('lundi : '), Text('8h30-20h30')]),
-        )
-      ]),
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('mardi : '), Text('8h30-20h30')]),
-        )
-      ]),
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('mercredi : '), Text('8h30-20h30')]),
-        )
-      ]),
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('jeudi : '), Text('8h30-20h30')]),
-        )
-      ]),
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('vendredi : '), Text('8h30-20h30')]),
-        )
-      ]),
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('samedi : '), Text('8h30-21h30')]),
-        )
-      ]),
-      TableRow(children: [
-        TableCell(
-          child: Row(children: [Text('dimanche : '), Text('Fermé')]),
-        )
-      ]),
-    ]);
+    return Container(
+        color: Colors.white,
+        padding: EdgeInsets.all(10.0),
+        child: Table(border: TableBorder.all(color: Colors.black), children: [
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('lundi : '), Text('8h30-20h30')]),
+            )
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('mardi : '), Text('8h30-20h30')]),
+            )
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('mercredi : '), Text('8h30-20h30')]),
+            )
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('jeudi : '), Text('8h30-20h30')]),
+            )
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('vendredi : '), Text('8h30-20h30')]),
+            )
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('samedi : '), Text('8h30-21h30')]),
+            )
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Row(children: [Text('dimanche : '), Text('Fermé')]),
+            )
+          ]),
+        ]));
   }
 }

@@ -25,48 +25,42 @@ class _ShopInfosState extends State<ShopInfos> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
         ),
-        title: Text(widget.shopData.name),
-        content: Column(
+        title: Center(
+          child: Text(widget.shopData.name, textAlign: TextAlign.center),
+        ),
+        content: ListView(
           children: <Widget>[
-            Text(widget.shopData.open ? "Ouvert" : "Fermé"),
+            Center(
+              child: Text(widget.shopData.open ? "Ouvert" : "Fermé",
+                  style: TextStyle(color: Colors.lightGreen),
+                  textAlign: TextAlign.center),
+            ),
             Container(
               width: 230,
               height: 200,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: widget.shopData.photos.length,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                        padding: EdgeInsets.only(right: 1.0),
-                        child: SizedBox(
-                          height: 100,
-                          child: Image.network(widget.buildPhotoURL(
-                              widget.shopData.photos[index].photoReference)),
-                        ));
-                  }),
+              child: Center(
+                  child: SizedBox(
+                height: 180,
+                child: Image.network(widget
+                    .buildPhotoURL(widget.shopData.photos[0].photoReference)),
+              )),
             ),
             Text(widget.shopData.address),
             Text("Personnel dédié : " +
                 (widget.shopData.dedicatedStaff
                     ? "Disponible"
                     : "Indisponible")),
+            Divider(),
             ShopSchedule(widget.shopData),
+            Divider(),
             RaisedButton(
-              color: Colors.lightGreen,
+              color: Colors.lightBlue,
               child: Text(
                 'Itinéraire au sein du magasin',
                 style: TextStyle(color: Colors.white),
               ),
               onPressed: () =>
                   {Navigator.of(context).pop(false), widget.bottomTapped(1)},
-            ),
-            RaisedButton(
-              color: Colors.lightGreen,
-              child: Text(
-                'Fermer',
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => Navigator.of(context).pop(false),
             )
           ],
         ));
