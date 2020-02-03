@@ -14,7 +14,7 @@ class ShopInfos extends StatefulWidget {
   _ShopInfosState createState() => _ShopInfosState();
 
   String buildPhotoURL(String photoReference) {
-    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${photoReference}&key=${this.googleApiKey}";
+    return "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=$photoReference&key=${this.googleApiKey}";
   }
 }
 
@@ -29,8 +29,9 @@ class _ShopInfosState extends State<ShopInfos> {
         content: Column(
           children: <Widget>[
             Text(widget.shopData.open ? "Ouvert" : "Fermé"),
-            /*Container(
+            Container(
               width: 230,
+              height: 200,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: widget.shopData.photos.length,
@@ -43,7 +44,7 @@ class _ShopInfosState extends State<ShopInfos> {
                               widget.shopData.photos[index].photoReference)),
                         ));
                   }),
-            ),*/
+            ),
             Text(widget.shopData.address),
             Text("Personnel dédié : " +
                 (widget.shopData.dedicatedStaff
