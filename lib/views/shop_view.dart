@@ -14,7 +14,7 @@ class ShopView extends StatefulWidget {
 }
 
 class _ShopViewState extends State<ShopView> {
-  String currentText = "";
+  String currentText = selectedShop ?? "";
   String _shoppingListName;
   Map<String, List<String>> _shoppingLists = {};
   List<String> _listName;

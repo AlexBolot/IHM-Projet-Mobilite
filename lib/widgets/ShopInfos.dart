@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/model/ShopData.dart';
 import 'package:ihm_projet_mobilite/widgets/shop_schedule.dart';
+import 'package:ihm_projet_mobilite/shared.dart';
+
 
 class ShopInfos extends StatefulWidget {
   final ShopData shopData;
