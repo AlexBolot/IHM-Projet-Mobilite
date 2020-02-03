@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/views/map_view.dart';
+import 'package:ihm_projet_mobilite/views/shop_view.dart';
 import 'package:ihm_projet_mobilite/views/shopping_lists_view.dart';
 
 class HomeView extends StatefulWidget {
@@ -31,13 +32,26 @@ class _HomeViewState extends State<HomeView> {
       ),
       BottomNavigationBarItem(
         title: Text(
+          'Magasin',
+          style: TextStyle(fontSize: index == 0 ? 18 : 12),
+        ),
+        icon: Container(
+          child: Icon(
+            Icons.store,
+            color: index == 1 ? Colors.blue : Colors.black,
+            size: index == 1 ? 32 : 24,
+          ),
+        ),
+      ),
+      BottomNavigationBarItem(
+        title: Text(
           'Liste des courses',
           style: TextStyle(fontSize: index == 1 ? 18 : 12),
         ),
         icon: Icon(
           Icons.shopping_basket,
-          color: index == 1 ? Colors.blue : Colors.black,
-          size: index == 1 ? 32 : 24,
+          color: index == 2 ? Colors.blue : Colors.black,
+          size: index == 2 ? 32 : 24,
         ),
       ),
     ];
@@ -52,6 +66,7 @@ class _HomeViewState extends State<HomeView> {
       },
       children: <Widget>[
         MapView(),
+        ShopView(),
         ShoppingListsView()
       ],
     );

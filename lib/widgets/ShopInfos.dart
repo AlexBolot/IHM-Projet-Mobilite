@@ -24,7 +24,7 @@ class _ShopInfosState extends State<ShopInfos> {
             Text(widget.shopData.open ? "Ouvert" : "Fermé"),
             Image.asset('./images/carrefour.jpg', fit: BoxFit.cover),
             Text(widget.shopData.address),
-            Text("Personnel dédié :" +
+            Text("Personnel dédié : " +
                 (widget.shopData.dedicatedStaff ? "Disponible" : "Indisponible")),
           ],
         ));
