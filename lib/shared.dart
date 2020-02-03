@@ -9,4 +9,4 @@ Color contrastOf(Color background) {
 
 SharedPreferences prefs;
 
-var shops = [];
+List<String> shops = new List();

@@ -37,7 +37,7 @@ class _ShopViewState extends State<ShopView> {
       key: key,
       decoration: new InputDecoration(hintText: "Entrer un Magasin"),
       controller: _shopNameController,
-      suggestions: suggestions,
+      suggestions: shops,
       textChanged: (text) => currentText = text,
       clearOnSubmit: false,
       textSubmitted: (text) => setState(() {
@@ -45,41 +45,6 @@ class _ShopViewState extends State<ShopView> {
       }),
     );
   }
-
-  List<String> suggestions = [
-    "Apple",
-    "Armidillo",
-    "Actual",
-    "Actuary",
-    "America",
-    "Argentina",
-    "Australia",
-    "Antarctica",
-    "Blueberry",
-    "Cheese",
-    "Danish",
-    "Eclair",
-    "Fudge",
-    "Granola",
-    "Hazelnut",
-    "Ice Cream",
-    "Jely",
-    "Kiwi Fruit",
-    "Lamb",
-    "Macadamia",
-    "Nachos",
-    "Oatmeal",
-    "Palm Oil",
-    "Quail",
-    "Rabbit",
-    "Salad",
-    "T-Bone Steak",
-    "Urid Dal",
-    "Vanilla",
-    "Waffles",
-    "Yam",
-    "Zest"
-  ];
 
   @override
   Widget build(BuildContext context) {
