@@ -35,7 +35,11 @@ class _ShoppingListsViewState extends State<ShoppingListsView> {
     bool shouldDelete = await showDialog(context: context, child: DeleteList());
 
     if (shouldDelete ?? false) {
-      setState(() => _shoppingLists.remove(text));
+      setState(() {
+        _shoppingLists.remove(text);
+        prefs.setStringList('shoppingLists', _shoppingLists.keys.toList());
+        prefs.remove(text);
+      });
     }
   }
 
