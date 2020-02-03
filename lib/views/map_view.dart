@@ -14,8 +14,9 @@ class MapView extends StatefulWidget {
   static const String routeName = "/MapView";
 
   final String title;
+  final Function(int) bottomTapped;
 
-  const MapView({this.title = 'Magasin'});
+  const MapView({this.title = 'Magasin', this.bottomTapped});
 
   @override
   _MapViewState createState() => _MapViewState();
@@ -86,7 +87,9 @@ class _MapViewState extends State<MapView> {
             markerId: MarkerId(f.id),
             position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
             onTap: () => showDialog(
-                context: context, child: ShopInfos(_shopsData[f.id])));
+                context: context, child: ShopInfos(_shopsData[f.id],
+                "AIzaSyApEnhQoSvcowDisHAGJAh5HyXCOXNo8fQ",
+                widget.bottomTapped)));
         _markers.add(marker);
         shops.add(f.name);
       }
