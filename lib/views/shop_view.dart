@@ -1,6 +1,8 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
 
+import '../shared.dart';
+
 class ShopView extends StatefulWidget {
   static const String routeName = "/ShopView";
 
@@ -15,6 +17,8 @@ class ShopView extends StatefulWidget {
 class _ShopViewState extends State<ShopView> {
   String currentText = "";
   String _shoppingListName;
+  Map<String, List<String>> _shoppingLists = {};
+  List<String> _listName;
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
   TextEditingController _shopNameController = TextEditingController();
   SimpleAutoCompleteTextField textField;
@@ -22,6 +26,11 @@ class _ShopViewState extends State<ShopView> {
   @override
   void initState() {
     super.initState();
+    _listName = prefs.getStringList('shoppingLists');
+
+    (_listName ?? []).forEach((name) {
+      _shoppingLists.putIfAbsent(name, () => prefs.getStringList(name));
+    });
   }
 
   _ShopViewState() {
@@ -37,13 +46,6 @@ class _ShopViewState extends State<ShopView> {
       }),
     );
   }
-
-  List<String> _listName = [
-    "Liste 1",
-    "Liste 2",
-    "Liste 3",
-    "Liste 4",
-  ];
 
   List<String> suggestions = [
     "Apple",
@@ -104,6 +106,7 @@ class _ShopViewState extends State<ShopView> {
               setState(() {
                 _shoppingListName = newValue;
                 print(_shoppingListName);
+                print(_shoppingLists[_shoppingListName]);
               });
             },
             items: _listName.map<DropdownMenuItem<String>>((String value) {
