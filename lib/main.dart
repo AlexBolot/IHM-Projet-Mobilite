@@ -32,5 +32,25 @@ class MyApp extends StatelessWidget {
 
   _asyncLoading() async {
     prefs = await SharedPreferences.getInstance();
+
+    List<String> shoppingLists = prefs.getStringList('shoppingLists');
+
+    if (shoppingLists.isEmpty) {
+      shoppingLists.add("Courses Légumes");
+      await prefs.setStringList('shoppingLists', shoppingLists);
+
+      await prefs.setStringList(
+        'Courses Légumes',
+        [
+          '🥕 3 x Carottes',
+          '🥦 1 x Brocolis',
+          '🍆 2 x Aubergines',
+          '🍅 4 x Tomates',
+          '🥝 3 x Kiwis',
+          '🥔 8 x Pommes de terre',
+          '🥒 6 x Concombres',
+        ],
+      );
+    }
   }
 }

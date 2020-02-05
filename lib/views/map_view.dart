@@ -80,16 +80,22 @@ class _MapViewState extends State<MapView> {
     result.results.forEach((f) {
       if (!_shopsData.containsKey(f.id)) {
         _shopsData.putIfAbsent(
-            f.id,
-            () => new ShopData(f.id, f.name, f.vicinity, true, f.types,
-                f.openingHours, f.photos, f.rating, true));
+          f.id,
+          () => ShopData(f.id, f.name, f.vicinity, true, f.types,
+              f.openingHours, f.photos, f.rating, true),
+        );
         Marker marker = Marker(
-            markerId: MarkerId(f.id),
-            position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
-            onTap: () => showDialog(
-                context: context, child: ShopInfos(_shopsData[f.id],
-                "AIzaSyApEnhQoSvcowDisHAGJAh5HyXCOXNo8fQ",
-                widget.bottomTapped)));
+          markerId: MarkerId(f.id),
+          position: LatLng(f.geometry.location.lat, f.geometry.location.lng),
+          onTap: () => showDialog(
+            context: context,
+            child: ShopInfos(
+              _shopsData[f.id],
+              "AIzaSyApEnhQoSvcowDisHAGJAh5HyXCOXNo8fQ",
+              widget.bottomTapped,
+            ),
+          ),
+        );
         _markers.add(marker);
         shops.add(f.name);
       }

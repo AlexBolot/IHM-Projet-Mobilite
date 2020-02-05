@@ -9,6 +9,6 @@ Color contrastOf(Color background) {
 
 SharedPreferences prefs;
 
-List<String> shops = new List();
+List<String> shops = [];
 
 String selectedShop;

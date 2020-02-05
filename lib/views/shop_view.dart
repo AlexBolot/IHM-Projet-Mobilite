@@ -19,26 +19,22 @@ class _ShopViewState extends State<ShopView> {
   Map<String, List<String>> _shoppingLists = {};
   List<String> _listName;
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
-  TextEditingController _shopNameController = TextEditingController(text: selectedShop);
+  TextEditingController _shopNameController =
+      TextEditingController(text: selectedShop);
   SimpleAutoCompleteTextField textField;
 
   @override
   void initState() {
     super.initState();
-    _listName = prefs.getStringList('shoppingLists');
+    _listName = prefs.getStringList('shoppingLists') ?? [];
 
-    if(_listName == null) {
-      _listName = new List();
-    }
-    (_listName ?? []).forEach((name) {
+    _listName.forEach((name) {
       _shoppingLists.putIfAbsent(name, () => prefs.getStringList(name));
     });
-  }
 
-  _ShopViewState() {
     textField = SimpleAutoCompleteTextField(
       key: key,
-      decoration: new InputDecoration(hintText: "Entrer un Magasin"),
+      decoration: new InputDecoration(hintText: "Saisir le nom du Magasin"),
       controller: _shopNameController,
       suggestions: shops,
       textChanged: (text) => currentText = text,
@@ -53,23 +49,21 @@ class _ShopViewState extends State<ShopView> {
   Widget build(BuildContext context) {
     selectedShop = "";
     return new Scaffold(
-        body: ListView(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal:24.0, vertical: 16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text("Sélection Magasin"),
-            ListTile(
-              title: textField,
-            ),
-            Text("Sélection Liste"),
+            textField,
             DropdownButton<String>(
-              hint: Text("Choisir liste"),
+              hint: Text("Choisir liste de courses"),
               value: _shoppingListName,
               icon: Icon(Icons.arrow_drop_down),
               iconSize: 24,
               elevation: 16,
-              underline: Container(
-                height: 2,
-                color: Colors.blue,
-              ),
+              underline: Container(height: 2, color: Colors.blue),
               onChanged: (String newValue) {
                 setState(() {
                   _shoppingListName = newValue;
@@ -84,9 +78,15 @@ class _ShopViewState extends State<ShopView> {
                 );
               }).toList(),
             ),
-            Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
+            Flexible(
+              child: Center(
+                child:
+                    Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
+              ),
+            ),
           ],
-        )
+        ),
+      ),
     );
   }
 }
