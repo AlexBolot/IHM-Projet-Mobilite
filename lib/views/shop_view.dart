@@ -1,6 +1,7 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/shared.dart';
+import 'package:ihm_projet_mobilite/utils/painter.dart';
 
 class ShopView extends StatefulWidget {
   static const String routeName = "/ShopView";
@@ -79,14 +80,20 @@ class _ShopViewState extends State<ShopView> {
               }).toList(),
             ),
             Flexible(
-              child: Center(
-                child:
-                    Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
-              ),
+              child: Stack(
+                children:[
+                  Center(
+                    child: Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
+                  ),
+                  CustomPaint(
+                    painter: Painter(),
+                  )
+                ]
+              )
             ),
-          ],
+          ]
         ),
-      ),
+      )
     );
   }
 }
