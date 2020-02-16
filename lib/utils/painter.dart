@@ -6,8 +6,32 @@ const RED = Color(0xffcc3030);
 
 class Painter extends CustomPainter {
 
+  Size size;
+  List<Offset> points /*= [
+    Offset(20, 160),
+    Offset(40, 160),
+    Offset(40, 55),
+    Offset(220, 55),
+    Offset(220, 72),
+    Offset(260, 72),
+    Offset(260, 85),
+    Offset(220, 85),
+    Offset(220, 135),
+    Offset(110, 135),
+    Offset(110, 180),
+    Offset(40, 180),
+    Offset(40, 170),
+    Offset(20, 170)
+  ]*/;
+
+  Painter({Size size, List<Offset> points}){
+    this.size = size;
+    this.points = points;
+  }
+
   @override
   void paint(Canvas canvas, Size size) {
+    //print(size.toString());
     if (size.width > 1.0 && size.height > 1.0) {
       print(">1.9");
       SizeUtil.size = size;
@@ -17,23 +41,20 @@ class Painter extends CustomPainter {
       ..color = RED
       ..isAntiAlias = true
       ..strokeWidth = 3;
-    canvas.drawLine(Offset(20, 285), Offset(40, 285) , paint);
-    canvas.drawLine(Offset(40, 285), Offset(40, 180) , paint);
-    canvas.drawLine(Offset(40, 180), Offset(220, 180) , paint);
-    canvas.drawLine(Offset(220, 180), Offset(220, 197) , paint);
-    canvas.drawLine(Offset(220, 197), Offset(260, 197) , paint);
-    canvas.drawLine(Offset(260, 197), Offset(260, 210) , paint);
-    canvas.drawLine(Offset(260, 210), Offset(220, 210) , paint);
-    canvas.drawLine(Offset(220, 210), Offset(220, 260) , paint);
-    canvas.drawLine(Offset(220, 260), Offset(110, 260) , paint);
-    canvas.drawLine(Offset(110, 260), Offset(110, 305) , paint);
-    canvas.drawLine(Offset(110, 305), Offset(40, 305) , paint);
-    canvas.drawLine(Offset(40, 305), Offset(40, 295) , paint);
-    canvas.drawLine(Offset(40, 295), Offset(20, 295) , paint);
+
+    //SizeUtil.size = this.size;
+    //print(this.size);
+    for(int i = 1; i < this.points.length; i++){
+      canvas.drawLine(this.points[i-1], this.points[i], paint);
+    }
   }
 
   @override
   bool shouldRepaint(CustomPainter old) {
     return true;
+  }
+
+  Offset _convertLogicSize(Offset off) {
+    return Offset(SizeUtil.getAxisX(off.dx), SizeUtil.getAxisY(off.dy));
   }
 }

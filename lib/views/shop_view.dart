@@ -23,6 +23,8 @@ class _ShopViewState extends State<ShopView> {
   TextEditingController _shopNameController =
       TextEditingController(text: selectedShop);
   SimpleAutoCompleteTextField textField;
+  bool showPath = false;
+  List<List<Offset>> pathList;
 
   @override
   void initState() {
@@ -44,6 +46,7 @@ class _ShopViewState extends State<ShopView> {
         print(text);
       }),
     );
+    pathList = this.createPathList();
   }
 
   @override
@@ -79,21 +82,86 @@ class _ShopViewState extends State<ShopView> {
                 );
               }).toList(),
             ),
+            RaisedButton.icon(
+              color: Theme.of(context).primaryColor,
+              onPressed: () {
+                if(_shoppingListName != null){
+                  this.setState(() {this.showPath = !this.showPath;});
+                }
+              },
+              icon: Icon(
+                Icons.explore,
+                color: contrastOf(Theme.of(context).primaryColor),
+              ),
+              label: Text(
+                'Afficher chemin le plus court',
+                style: TextStyle(
+                  color: contrastOf(Theme.of(context).primaryColor),
+                ),
+              ),
+            ),
             Flexible(
-              child: Stack(
-                children:[
-                  Center(
-                    child: Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
-                  ),
-                  CustomPaint(
-                    painter: Painter(),
-                  )
-                ]
+              child: Center(
+                child: Stack(
+                  children:[
+                    Image.asset('./images/plan_magasin.jpg', fit: BoxFit.cover),
+                    showPath ?
+                    CustomPaint(
+                      painter: Painter(
+                        size: MediaQuery.of(context).size,
+                        points: pathList[_listName.indexOf(_shoppingListName)]
+                      ),
+                    ) : Container()
+                  ]
+                )
               )
             ),
           ]
         ),
       )
     );
+  }
+
+
+  List<List<Offset>> createPathList() {
+    List<List<Offset>> paths = [];
+    paths.add([Offset(20, 160),
+               Offset(40, 160),
+               Offset(40, 55),
+               Offset(220, 55),
+               Offset(220, 72),
+               Offset(260, 72),
+               Offset(260, 85),
+               Offset(220, 85),
+               Offset(220, 135),
+               Offset(110, 135),
+               Offset(110, 180),
+               Offset(40, 180),
+               Offset(40, 170),
+               Offset(20, 170)]);
+    paths.add([Offset(20, 160),
+               Offset(40, 160),
+               Offset(40, 85),
+               Offset(140, 85),
+               Offset(140, 50),
+               Offset(220, 50),
+               Offset(220, 15),
+               Offset(310, 15),
+               Offset(310, 75),
+               Offset(225, 75),
+               Offset(225, 120),
+               Offset(170, 120),
+               Offset(170, 140),
+               Offset(220, 140),
+               Offset(220, 185),
+               Offset(280, 185),
+               Offset(280, 195),
+               Offset(100, 195),
+               Offset(100, 180),
+               Offset(40, 180),
+               Offset(40, 170),
+               Offset(20, 170),
+    ]);
+    return paths;
   }
 }
