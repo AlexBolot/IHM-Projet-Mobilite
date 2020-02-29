@@ -32,7 +32,7 @@ class _UpdateListState extends State<UpdateList> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10.0)),
       ),
-      title: Text('Ajouter une liste', textAlign: TextAlign.center),
+      title: Text('Modifier une liste', textAlign: TextAlign.center),
       content: Container(
         child: Column(
           mainAxisSize: MainAxisSize.max,

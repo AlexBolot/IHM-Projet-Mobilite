@@ -90,6 +90,7 @@ class _HomeViewState extends State<HomeView> {
           backgroundColor: Colors.white,
           appBar: AppBar(title: Text('EasyShopping')),
           body: buildPageView(),
+          resizeToAvoidBottomInset: false,
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: index,
             backgroundColor: Colors.white,
