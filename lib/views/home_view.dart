@@ -1,5 +1,6 @@
 import 'dart:ui';
-
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/views/map_view.dart';
 import 'package:ihm_projet_mobilite/views/shop_view.dart';

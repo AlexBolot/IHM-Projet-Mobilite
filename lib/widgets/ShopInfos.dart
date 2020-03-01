@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ihm_projet_mobilite/model/ShopData.dart';
 import 'package:ihm_projet_mobilite/shared.dart';
 import 'package:ihm_projet_mobilite/widgets/shop_schedule.dart';
+import 'package:intl/intl.dart';
 
 import 'crowd_stats.dart';
 
@@ -25,7 +26,7 @@ class _ShopInfosState extends State<ShopInfos> {
   @override
   Widget build(BuildContext context) {
     DateTime date = DateTime.now();
-    String dateFormat = DateFormat('EEEE').format(date);
+    String dateFormat = new DateFormat('EEEE').format(date);
 
     return AlertDialog(
       shape: RoundedRectangleBorder(
@@ -55,7 +56,7 @@ class _ShopInfosState extends State<ShopInfos> {
               (widget.shopData.accessible ? "Accessible" : "Inaccessible")),
           ShopSchedule(widget.shopData),
           Divider(),
-          CrowdGraph(),
+          CrowdGraph(WeekDay.MONDAY),
           Divider(),
           RaisedButton(
             color: Colors.lightBlue,
