@@ -4,6 +4,8 @@ import 'package:ihm_projet_mobilite/model/ShopData.dart';
 import 'package:ihm_projet_mobilite/shared.dart';
 import 'package:ihm_projet_mobilite/widgets/shop_schedule.dart';
 
+import 'crowd_stats.dart';
+
 class ShopInfos extends StatefulWidget {
   final ShopData shopData;
   final String googleApiKey;
@@ -22,6 +24,9 @@ class ShopInfos extends StatefulWidget {
 class _ShopInfosState extends State<ShopInfos> {
   @override
   Widget build(BuildContext context) {
+    DateTime date = DateTime.now();
+    String dateFormat = DateFormat('EEEE').format(date);
+
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -29,7 +34,7 @@ class _ShopInfosState extends State<ShopInfos> {
       title: Center(
         child: Text(widget.shopData.name, textAlign: TextAlign.center),
       ),
-      content: Column(
+      content: ListView(
         children: <Widget>[
           getOpenClosedBadge(),
           Container(
@@ -49,6 +54,9 @@ class _ShopInfosState extends State<ShopInfos> {
           Text("Accessibilité : " +
               (widget.shopData.accessible ? "Accessible" : "Inaccessible")),
           ShopSchedule(widget.shopData),
+          Divider(),
+          CrowdGraph(),
+          Divider(),
           RaisedButton(
             color: Colors.lightBlue,
             child: Text(
