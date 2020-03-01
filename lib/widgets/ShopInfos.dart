@@ -46,9 +46,9 @@ class _ShopInfosState extends State<ShopInfos> {
           Text(widget.shopData.address),
           Text("Personnel dédié : " +
               (widget.shopData.dedicatedStaff ? "Disponible" : "Indisponible")),
-          Divider(),
+          Text("Accessibilité : " +
+              (widget.shopData.accessible ? "Accessible" : "Inaccessible")),
           ShopSchedule(widget.shopData),
-          Divider(),
           RaisedButton(
             color: Colors.lightBlue,
             child: Text(

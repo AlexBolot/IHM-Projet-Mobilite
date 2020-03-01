@@ -10,6 +10,7 @@ class ShopData {
   List<Photo> photos;
   num rating;
   bool dedicatedStaff;
+  bool accessible;
 
   ShopData(
       String id,
@@ -20,7 +21,8 @@ class ShopData {
       OpeningHours openingHours,
       List<Photo> photos,
       num rating,
-      bool dedicatedStaff) {
+      bool dedicatedStaff,
+      bool accessible) {
     this.id = id;
     this.name = name;
     this.address = address;
@@ -30,6 +32,7 @@ class ShopData {
     this.photos = photos;
     this.rating = rating;
     this.dedicatedStaff = dedicatedStaff;
+    this.accessible = accessible;
   }
 
   @override

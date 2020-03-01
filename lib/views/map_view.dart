@@ -109,7 +109,7 @@ class _MapViewState extends State<MapView> {
         _shopsData.putIfAbsent(
           f.id,
           () => ShopData(f.id, f.name, f.vicinity, true, f.types,
-              f.openingHours, f.photos, f.rating, true),
+              f.openingHours, f.photos, f.rating, true, true),
         );
         Marker marker = Marker(
           markerId: MarkerId(f.id),
